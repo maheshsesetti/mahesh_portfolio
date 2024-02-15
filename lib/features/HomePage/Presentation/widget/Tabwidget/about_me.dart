@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AboutMeWidget extends StatelessWidget {
   const AboutMeWidget({super.key});
@@ -14,24 +15,28 @@ class AboutMeWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   "Hello I’am Mahesh Babu.\nFlutter Developer\nBased In India.",
                   style: TextStyle(
-                    fontSize: 48,
+                    fontSize: 12.sp,
                   ),
                 ),
-              const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Text(
                   "I'm Evren Shah Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to specimen book.",
-                  style: TextStyle(fontSize: 16, color: Colors.grey[350]),
+                  style: TextStyle(fontSize: 4.sp, color: Colors.grey[350]),
                 ),
-                const SizedBox(height: 40,),
+                const SizedBox(
+                  height: 40,
+                ),
                 Row(
                   children: [
                     GestureDetector(
                       onTap: () {},
                       child: SizedBox.square(
-                        dimension: 40,
+                          dimension: 40,
                           child: Image.asset("assets/images/linkedin.png")),
                     ),
                     GestureDetector(
@@ -49,6 +54,5 @@ class AboutMeWidget extends StatelessWidget {
         Expanded(child: Image.asset('assets/images/Frame 20.png')),
       ],
     );
-
   }
 }

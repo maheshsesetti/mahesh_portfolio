@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../responsive.dart';
+import '../mobile_widget/mobile_tab_view/SkillsWidget.dart';
+import '../mobile_widget/mobile_tab_view/mobile_about_candidate.dart';
+import '../mobile_widget/mobile_tab_view/mobile_about_me.dart';
+import '../mobile_widget/mobile_tab_view/mobile_contact_me.dart';
+import '../mobile_widget/mobile_tab_view/mobile_experience.dart';
+import '../mobile_widget/mobile_tab_view/mobile_my_projects.dart';
 import '../widget/NavSmall.dart';
 import '../widget/Tabwidget/SkillsWidget.dart';
 import '../widget/Tabwidget/about_candidate.dart';
@@ -38,12 +45,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AdaptiveNavBar(
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
         centerTitle: false,
-        title: const ListTile(
+        title: ListTile(
           leading: Icon(
             Icons.business_center_outlined,
-            size: 30,
+            size: 15.sp,
           ),
-          title: Text("Mahesh Portfolio"),
+          title: Text(
+            "Mahesh Portfolio",
+            style: TextStyle(fontSize: 10.sp),
+          ),
         ),
         screenWidth: MediaQuery.sizeOf(context).width,
         navBarItems: [
@@ -57,26 +67,62 @@ class _HomePageState extends State<HomePage> {
           NavBarItem(
               text: "Skills",
               onTap: () {
-                _controller.animateTo(MediaQuery.sizeOf(context).height/1.5,
+                _controller.animateTo(MediaQuery.sizeOf(context).height / 1.5.h,
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeOut);
               }),
-          NavBarItem(text: "Project", onTap: () {
-              _controller.animateTo(MediaQuery.sizeOf(context).height * 1.4,
+          NavBarItem(
+              text: "Project",
+              onTap: () {
+                _controller.animateTo(MediaQuery.sizeOf(context).height * 1.4.h,
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeOut);
-          }),
+              }),
           NavBarItem(
               text: "Contact me",
               onTap: () {
-                _controller.animateTo( _controller.position.maxScrollExtent,
+                _controller.animateTo(_controller.position.maxScrollExtent,
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeOut);
               }),
         ],
       ),
       body: Responsive(
-          desktopBody: desktopBody(context), mobileBody: const Placeholder()),
+          desktopBody: desktopBody(context), mobileBody: mobileBody(context)),
+    );
+  }
+
+  Widget mobileBody(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+            child: ListView(
+          controller: _controller,
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          children: [
+            const AboutMeMobileWidget(),
+            const SizedBox(
+              height: 30,
+            ),
+            Center(
+                child: Text(
+              "My Skills",
+              style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.bold),
+            )),
+            const MobileskillsWidget(),
+            const SizedBox(
+              height: 30,
+            ),
+            const MobileExperience(),
+            const MobileAboutCandidateWidget(),
+            const MobileMyProjectsWidget(),
+            const MobileContactMeWidget()
+          ],
+        ))
+      ],
     );
   }
 
@@ -89,39 +135,37 @@ class _HomePageState extends State<HomePage> {
           child: ListView(
             controller: _controller,
             shrinkWrap: true,
-            children: const [
-              AboutMeWidget(),
-              SizedBox(
+            physics: const ClampingScrollPhysics(),
+            children: [
+              const AboutMeWidget(),
+              const SizedBox(
                 height: 100,
               ),
               Center(
                   child: Text(
                 "My Skills",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold),
               )),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              SkillsWidget(),
-              SizedBox(
+              const SkillsWidget(),
+              const SizedBox(
                 height: 100,
               ),
-              SizedBox(
+              const Experience(),
+              const SizedBox(
                 height: 10,
               ),
-              Experience(),
-              SizedBox(
+              const AboutCandidateWidget(),
+              const SizedBox(
                 height: 10,
               ),
-              AboutCandidateWidget(),
-              SizedBox(
+              const MyProjectsWidget(),
+              const SizedBox(
                 height: 10,
               ),
-              MyProjectsWidget(),
-              SizedBox(
-                height: 10,
-              ),
-              ContactMeWidget(),
+              const ContactMeWidget(),
             ],
           ),
         )

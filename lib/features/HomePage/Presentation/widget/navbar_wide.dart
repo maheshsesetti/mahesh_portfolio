@@ -32,14 +32,16 @@ class NavBarWide extends StatelessWidget {
           ),
           ElevatedButton(
               style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
                   shape: const RoundedRectangleBorder()),
               onPressed: () {},
               child: const Row(
                 children: [
-                  Text("Resume"),
+                  Text("Resume",style: TextStyle(color: Colors.white),),
                   Icon(
                     Icons.download_sharp,
                     size: 20,
+                    color: Colors.white,
                   )
                 ],
               ))
