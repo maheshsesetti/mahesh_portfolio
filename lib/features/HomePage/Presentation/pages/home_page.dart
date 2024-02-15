@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../../../responsive.dart';
 import '../widget/NavSmall.dart';
 import '../widget/Tabwidget/SkillsWidget.dart';
@@ -17,7 +16,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onPrimary,
       appBar: AdaptiveNavBar(
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
         centerTitle: false,
         title: const ListTile(
           leading: Icon(
@@ -45,32 +46,45 @@ class HomePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-            child: ListView(
-          shrinkWrap: true,
-          children: const [
-            AboutMeWidget(),
-            SizedBox(
-              height: 10,
-            ),
-            SkillsWidget(),
-            SizedBox(
-              height: 10,
-            ),
-            Experience(),
-            SizedBox(
-              height: 10,
-            ),
-            AboutCandidateWidget(),
-            SizedBox(
-              height: 10,
-            ),
-            MyProjectsWidget(),
-             SizedBox(
-              height: 10,
-            ),
-            ContactMeWidget(),
-          ],
-        ))
+          child: ListView(
+            shrinkWrap: true,
+            children: const [
+              AboutMeWidget(),
+              SizedBox(
+                height: 100,
+              ),
+              Center(
+                  child: Text(
+                "My Skills",
+                style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+              )),
+               SizedBox(
+                height: 30,
+              ),
+              SkillsWidget(),
+              SizedBox(
+                height: 100,
+              ),
+               
+              SizedBox(
+                height: 10,
+              ),
+              Experience(),
+              SizedBox(
+                height: 10,
+              ),
+              AboutCandidateWidget(),
+              SizedBox(
+                height: 10,
+              ),
+              MyProjectsWidget(),
+              SizedBox(
+                height: 10,
+              ),
+              ContactMeWidget(),
+            ],
+          ),
+        )
       ],
     );
   }

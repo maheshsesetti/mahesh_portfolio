@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: "Mahesh Portfolio's",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueGrey),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0x00333333)),
         useMaterial3: true,
       ),
       home: const HomePage(),
