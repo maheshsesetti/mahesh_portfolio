@@ -10,8 +10,26 @@ import '../widget/Tabwidget/my_projects.dart';
 import '../widget/navbar_item.dart';
 import '../widget/Tabwidget/about_me.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final ScrollController _controller = ScrollController();
+  bool isScroll = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      setState(() {
+        isScroll = _controller.offset <= 0;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +47,32 @@ class HomePage extends StatelessWidget {
         ),
         screenWidth: MediaQuery.sizeOf(context).width,
         navBarItems: [
-          NavBarItem(text: "About Me"),
-          NavBarItem(text: "Skills"),
-          NavBarItem(text: "Project"),
-          NavBarItem(text: "Contact me"),
+          NavBarItem(
+              text: "About Me",
+              onTap: () {
+                _controller.animateTo(0.0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeIn);
+              }),
+          NavBarItem(
+              text: "Skills",
+              onTap: () {
+                _controller.animateTo(MediaQuery.sizeOf(context).height/1.5,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeOut);
+              }),
+          NavBarItem(text: "Project", onTap: () {
+              _controller.animateTo(MediaQuery.sizeOf(context).height * 1.4,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeOut);
+          }),
+          NavBarItem(
+              text: "Contact me",
+              onTap: () {
+                _controller.animateTo( _controller.position.maxScrollExtent,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeOut);
+              }),
         ],
       ),
       body: Responsive(
@@ -47,6 +87,7 @@ class HomePage extends StatelessWidget {
       children: [
         Expanded(
           child: ListView(
+            controller: _controller,
             shrinkWrap: true,
             children: const [
               AboutMeWidget(),
@@ -56,16 +97,15 @@ class HomePage extends StatelessWidget {
               Center(
                   child: Text(
                 "My Skills",
-                style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               )),
-               SizedBox(
+              SizedBox(
                 height: 30,
               ),
               SkillsWidget(),
               SizedBox(
                 height: 100,
               ),
-               
               SizedBox(
                 height: 10,
               ),
